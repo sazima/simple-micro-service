@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-.
+import os
+
 from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
@@ -10,7 +12,7 @@ from email.header import Header
 from message.api import MessageService
 
 sender = "w@wktadmin.com"
-authCode = "secret"
+authCode = os.environ.get("MAIL_PASS", "secret")
 
 
 class MessageServiceHandler:

@@ -1,6 +1,6 @@
 package com.imooc.controller;
 
-import com.imooc.dto.UserDTO;
+import com.imooc.thrift.user.dto.UserDTO;
 import com.imooc.redis.RedisClient;
 import com.imooc.response.LoginResponse;
 import com.imooc.response.Response;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Random;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private ServiceProvider serviceProvider;
@@ -76,6 +77,12 @@ public class UserController {
         return new LoginResponse(token);
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        return "/login";
+    }
+
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public Response register(@RequestParam("username") String username,
@@ -107,6 +114,12 @@ public class UserController {
         return Response.SUCCESS;
     }
 
+    @RequestMapping(value = "/authentication", method = RequestMethod.GET)
+    @ResponseBody
+    public UserDTO authentication(@RequestHeader("token")String token) {
+        return redisClient.get(token);
+    }
+
     private String genToken() {
         return randomCode("0123456789abcdefghigklmnopqrstuvwxyz", 32);
     }
@@ -126,4 +139,5 @@ public class UserController {
         BeanUtils.copyProperties(userInfo, userDTO);
         return userDTO;
     }
+
 }

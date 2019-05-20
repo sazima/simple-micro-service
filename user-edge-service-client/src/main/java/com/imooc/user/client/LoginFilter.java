@@ -8,7 +8,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrBuilder;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -54,14 +53,14 @@ public abstract class LoginFilter implements Filter {
             if (userDTO == null) {
                 // 从接口中读取
                 userDTO = requestUserInfo(token);
+                // 写入缓存
+                cache.put(token, userDTO);
             }
         }
         if (userDTO == null) {
             httpServletResponse.sendRedirect("http://127.0.0.1:7911/user/login");
             return;
         }
-        // 写入缓存
-        cache.put(token, userDTO);
         login(httpServletRequest, httpServletResponse, userDTO);
         chain.doFilter(httpServletRequest, httpServletResponse);
     }
@@ -80,6 +79,7 @@ public abstract class LoginFilter implements Filter {
         DefaultHttpClient client = new DefaultHttpClient();
         HttpGet get = new HttpGet(url);
         InputStream inputStream = null;
+        UserDTO userDTO = null;
         try {
             HttpResponse response = client.execute(get);
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
@@ -92,8 +92,7 @@ public abstract class LoginFilter implements Filter {
             while ((len = inputStream.read(temp)) > 0) {
                 sb.append(new String(temp, 0, len));
             }
-            UserDTO userDTO = new ObjectMapper().readValue(sb.toString(), UserDTO.class);
-            return userDTO;
+            userDTO = new ObjectMapper().readValue(sb.toString(), UserDTO.class);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -105,7 +104,7 @@ public abstract class LoginFilter implements Filter {
                 }
             }
         }
-        return null;
+        return userDTO;
     }
 
 

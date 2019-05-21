@@ -17,6 +17,7 @@
         <module>course-dubbo-service-api</module>
         <module>course-dubbo-service</module>
         <module>source-eage-service</module>
+        <module>course-edge-service</module>
     </modules>
     <build>
         <plugins>

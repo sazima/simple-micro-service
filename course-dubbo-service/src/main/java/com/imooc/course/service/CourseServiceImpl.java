@@ -1,21 +1,25 @@
 package com.imooc.course.service;
 
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.imooc.course.mapper.CourseMapper;
+import com.imooc.course.dto.CourseDTO;
 import com.imooc.course.thrift.ServiceProvider;
-import com.imooc.dto.CourseDTO;
-import com.imooc.service.ICourseService;
-import com.imooc.thrift.user.UserInfo;
-import com.imooc.thrift.user.dto.TeacherDTO;
+import com.imooc.course.thrift.user.dto.TeacherDTO;
+import com.imooc.course.thrift.user.UserInfo;
 import org.apache.thrift.TException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
-@Service
+@Service(
+        version = "1.0.0",
+        application = "${dubbo.application.id}",
+        protocol = "${dubbo.protocol.id}",
+        registry = "${dubbo.registry.id}"
+)
 public class CourseServiceImpl implements ICourseService {
     @Autowired
     private CourseMapper courseMapper;
@@ -26,6 +30,7 @@ public class CourseServiceImpl implements ICourseService {
     @Override
     public List<CourseDTO> courseList() {
         List<CourseDTO> courseDTOS = courseMapper.listCourse();
+        System.out.println(courseDTOS);
         if (courseDTOS != null) {
             for (CourseDTO course : courseDTOS) {
                 Integer teacherId = courseMapper.getCourseTeacher(course.getId());

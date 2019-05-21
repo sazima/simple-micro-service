@@ -1,6 +1,6 @@
 package com.imooc.course.mapper;
 
-import com.imooc.dto.CourseDTO;
+import com.imooc.course.dto.CourseDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

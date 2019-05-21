@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class LoginFilter implements Filter {
     private static Cache<String, UserDTO> cache = CacheBuilder.newBuilder().maximumSize(1000).expireAfterWrite(3, TimeUnit.MINUTES).build();
 
+    protected abstract String userEdgeServiceAddr();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -74,7 +75,8 @@ public abstract class LoginFilter implements Filter {
      * @return
      */
     private UserDTO requestUserInfo(String token) {
-        String url = "http://localhost:7911/user/authentication";
+//        String url = "http://localhost:7911/user/authentication";
+        String url = "http://" + userEdgeServiceAddr() + "/user/authentication";
         @SuppressWarnings("deprecation")
         DefaultHttpClient client = new DefaultHttpClient();
         HttpGet get = new HttpGet(url);

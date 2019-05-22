@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@RequestMapping("/course")
 public class CourseController {
 
     @Reference(version = "1.0.0")

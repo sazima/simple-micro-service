@@ -2,7 +2,9 @@ package com.imooc.course.dto;
 
 import com.imooc.course.thrift.user.dto.TeacherDTO;
 
-public class CourseDTO {
+import java.io.Serializable;
+
+public class CourseDTO implements Serializable {
      private int id;
     private String title;
     private String description;

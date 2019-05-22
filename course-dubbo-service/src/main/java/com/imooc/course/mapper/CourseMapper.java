@@ -11,7 +11,7 @@ import java.util.List;
 public interface CourseMapper {
     @Select("select * from pe_course")
     List<CourseDTO> listCourse();
-    @Select("select user_id from pr_user_course" +
-            "where course_id = #{course_id}")
+    @Select("select user_id from pe_user_course " +
+            "where course_id = #{courseId}")
     Integer getCourseTeacher(@Param("courseId")Integer courseId);
 }

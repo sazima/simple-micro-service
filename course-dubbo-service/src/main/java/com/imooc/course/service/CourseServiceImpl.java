@@ -1,12 +1,12 @@
 package com.imooc.course.service;
 
 
-import com.alibaba.dubbo.config.annotation.Service;
-import com.imooc.course.mapper.CourseMapper;
 import com.imooc.course.dto.CourseDTO;
+import com.imooc.course.mapper.CourseMapper;
 import com.imooc.course.thrift.ServiceProvider;
 import com.imooc.course.thrift.user.dto.TeacherDTO;
 import com.imooc.course.thrift.user.UserInfo;
+import org.apache.dubbo.config.annotation.Service;
 import org.apache.thrift.TException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 
-@Service(
-        version = "1.0.0",
-        application = "${dubbo.application.id}",
-        protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}"
-)
+@Service(version = "1.0.0")
 public class CourseServiceImpl implements ICourseService {
     @Autowired
     private CourseMapper courseMapper;

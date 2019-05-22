@@ -3,7 +3,9 @@ package com.imooc.course.thrift;
 import com.imooc.course.thrift.user.UserService;
 import org.apache.thrift.TServiceClient;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.transport.*;
+import org.apache.thrift.transport.TFramedTransport;
+import org.apache.thrift.transport.TSocket;
+import org.apache.thrift.transport.TTransportException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

@@ -13,9 +13,7 @@ import java.util.List;
 @Controller
 public class CourseController {
 
-   @Reference(version = "1.0.0",
-            application = "${dubbo.application.id}",
-            registry = "${dubbo.registry.id}")
+    @Reference(version = "1.0.0", url = "dubbo://127.0.0.1:20880")
     private ICourseService courseService;
 
 

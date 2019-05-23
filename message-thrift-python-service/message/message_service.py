@@ -9,7 +9,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 
-from message.api import MessageService
+from api import MessageService
 
 sender = "w@wktadmin.com"
 authCode = os.environ.get("MAIL_PASS", "secret")

@@ -25,7 +25,50 @@
 sql:
 
 ```sql
+CREATE DATABASE db_course DEFAULT CHARSET utf8mb4;
+use db_course;
+CREATE TABLE `pe_course` (
+  `id` int(11) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `description` varchar(125) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `pe_user_course` (
+  `user_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `pe_course`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `pe_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+----------------------
+CREATE DATABASE db_user DEFAULT CHARSET utf8mb4;
+use db_user;
+
+CREATE TABLE `pe_teacher` (
+  `user_id` int(11) NOT NULL,
+  `intro` varchar(64) DEFAULT NULL,
+  `description` varchar(125) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+CREATE TABLE `pe_user` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `real_name` varchar(32) DEFAULT NULL,
+  `mobile` varchar(32) DEFAULT NULL,
+  `email` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `pe_user`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `pe_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 ```

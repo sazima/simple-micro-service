@@ -1,4 +1,5 @@
-# 用户服务
+# 
+## 用户服务
 
 - 用户登录
 - 用户注册
@@ -7,22 +8,22 @@
 - 单点登录
 
 
-# 课程服务
+## 课程服务
 
 - 登录验证
 - 课程 curd
 
-# 信息服务
+## 信息服务
 
 - 发送邮件
 - 发送短信
 
-# 用户 edge-service
-# 课程 edge-service
-# API GATEWAY
+## 用户 edge-service
+## 课程 edge-service
+## API GATEWAY
 
 ***
-sql:
+# sql:
 
 ```sql
 CREATE DATABASE db_course DEFAULT CHARSET utf8mb4;
@@ -72,3 +73,31 @@ ALTER TABLE `pe_user`
 COMMIT;
 
 ```
+
+# docker
+
+## hubor
+
+An open source trusted cloud native registry project that stores, signs, and scans content: **[hubor](https://github.com/goharbor/harbor)**
+
+
+## mesos
+
+### mesosphere/mesos
+
+
+- [mesos-master](https://hub.docker.com/r/mesosphere/mesos-master)
+
+
+- [mesos-slave](https://hub.docker.com/r/mesosphere/mesos-slave)
+
+ 
+
+### mesosphere/marathon
+Mesos上的调度框架
+A cluster-wide init and control system for services in cgroups or Docker containers: **[mesosphere/marathon](https://hub.docker.com/r/mesosphere/marathon)**
+
+### zookeeper
+
+### 安装
+

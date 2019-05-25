@@ -40,7 +40,7 @@ class MessageServiceHandler:
 if __name__ == '__main__':
     handler = MessageServiceHandler()
     processor = MessageService.Processor(handler)  # 处理
-    transport = TSocket.TServerSocket("localhost", "9090")  # 谁负责监听
+    transport = TSocket.TServerSocket("0.0.0.0", "9090")  # 谁负责监听
     tfactory = TTransport.TFramedTransportFactory()  # 传输方式
     pfactory = TBinaryProtocol.TBinaryProtocolFactory()  # 协议
 

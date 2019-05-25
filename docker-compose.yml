@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+
+  zookeeper:
+    image: zookeeper:3.5
+    ports:
+      - 2181:2181
+
+  redis:
+    image: redis
+
+  message-service:
+    image: message-thrift:latest
+    environment:
+      # 邮箱密码在环境变量中
+      MAIL_PASS: ${MAIL_PASS}
+
+  user-service:
+    image: user-service:latest
+    environment:
+      # 这是mysql的地址
+      MYSQL_ADDRESS: "192.168.0.113"
+
+  user-edge-service:
+    image: user-edge-service:latest
+    depends_on:
+      - user-service
+
+  course-dubbo-service:
+    image: course-dubbo-service:latest
+    environment:
+      MYSQL_ADDRESS: "192.168.0.113"
+    ports:
+      - 20880:20880
+    depends_on:
+      - user-service
+      - zookeeper
+
+  course-edge-service:
+    image: course-edge-service:latest
+    depends_on:
+      - course-dubbo-service
+      - zookeeper
+
+  api-gateway-zuul:
+    image: api-gateway-zuul:latest
+    ports:
+      - 8889:8889
+
+
+
+
+
+

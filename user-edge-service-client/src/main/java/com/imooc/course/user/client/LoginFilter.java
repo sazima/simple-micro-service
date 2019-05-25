@@ -59,7 +59,7 @@ public abstract class LoginFilter implements Filter {
             }
         }
         if (userDTO == null) {
-            httpServletResponse.sendRedirect("http://127.0.0.1:7911/user/login");
+            httpServletResponse.sendRedirect("http://user-edge-service:7911/user/login");
             return;
         }
         login(httpServletRequest, httpServletResponse, userDTO);

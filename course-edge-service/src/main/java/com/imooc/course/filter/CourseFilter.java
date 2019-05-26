@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 //@Component
 public class CourseFilter extends LoginFilter {
 
-//    @Value("1.1.1.1")
-//    private String userEdgeServiceAddr;
+    @Value("${user.edge.service.addr}")
+    private String userEdgeServiceAddr;
 
     @Override
     protected String userEdgeServiceAddr() {
-//        return userEdgeServiceAddr;
-        return null;
+        return userEdgeServiceAddr;
     }
 
     @Override

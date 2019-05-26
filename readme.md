@@ -74,30 +74,14 @@ COMMIT;
 
 ```
 
-# docker
 
-## hubor
+# ports-list
 
-An open source trusted cloud native registry project that stores, signs, and scans content: **[hubor](https://github.com/goharbor/harbor)**
-
-
-## mesos
-
-### mesosphere/mesos
-
-
-- [mesos-master](https://hub.docker.com/r/mesosphere/mesos-master)
-
-
-- [mesos-slave](https://hub.docker.com/r/mesosphere/mesos-slave)
-
- 
-
-### mesosphere/marathon
-Mesos上的调度框架
-A cluster-wide init and control system for services in cgroups or Docker containers: **[mesosphere/marathon](https://hub.docker.com/r/mesosphere/marathon)**
-
-### zookeeper
-
-### 安装
-
+```js
+user-thrift-service 7911
+user-edge-service 8080
+message-thrift-service 19090
+// course-service 8089
+course-edge-service 8081
+api-gatway-zuul  8889
+```

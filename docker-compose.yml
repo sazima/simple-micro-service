@@ -1,15 +1,6 @@
 version: '3'
 
 services:
-
-  zookeeper:
-    image: hub.imooc.com:11111/micro-service/zookeeper:3.5
-    ports:
-      - 2181:2181
-
-  redis:
-    image: hub.imooc.com:11111/micro-service/redis
-
   message-service:
     image: hub.imooc.com:11111/micro-service/message-thrift:latest
     environment:
@@ -26,22 +17,26 @@ services:
     image: hub.imooc.com:11111/micro-service/user-edge-service:latest
     depends_on:
       - user-service
+    environment:
+      # 这是mysql的地址
+      REDIS_HOST: "192.168.0.110"
 
   course-dubbo-service:
     image: hub.imooc.com:11111/micro-service/course-dubbo-service:latest
     environment:
       MYSQL_ADDRESS: "192.168.0.113"
+      ZOOKEEPER_HOST: "192.168.0.110"
     ports:
       - 20880:20880
     depends_on:
       - user-service
-      - zookeeper
 
   course-edge-service:
     image: hub.imooc.com:11111/micro-service/course-edge-service:latest
     depends_on:
       - course-dubbo-service
-      - zookeeper
+    environment:
+      ZOOKEEPER_HOST: "192.168.0.110"
 
   api-gateway-zuul:
     image: hub.imooc.com:11111/micro-service/api-gateway-zuul:latest

@@ -16,7 +16,6 @@ docker run -d --net=host --privileged \
   -v "$(pwd)/log/mesos_slave:/var/log/mesos" \
   -v "$(pwd)/tmp/mesos_slave:/var/tmp/mesos" \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /etc/hosts:/etc/hosts \
   -v /sys:/sys \
   -v /usr/local/bin/docker:/usr/local/bin/docker \
   --name mesos-slave \

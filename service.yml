@@ -1,10 +1,12 @@
 version: '3'
 
 services:
+  zookeeper:
+    image: zookeeper:3.5
+
   message-service:
     image: hub.imooc.com:11111/micro-service/message-thrift:latest
     deploy:
-#      endpoint_mode: dnsrr
       resources:
         limits:
           cpus: "0.2"
@@ -17,9 +19,8 @@ services:
     image: hub.imooc.com:11111/micro-service/user-service:latest
     environment:
       # 这是mysql的地址
-      MYSQL_ADDRESS: "192.168.0.113"
+      MYSQL_ADDRESS: "10.0.75.1"
     deploy:
-#      endpoint_mode: dnsrr
       resources:
         limits:
           cpus: "0.2"
@@ -31,22 +32,20 @@ services:
       - user-service
     environment:
       # 这是mysql的地址
-      REDIS_HOST: "192.168.0.113"
+      REDIS_HOST: "10.0.75.1"
 
   course-dubbo-service:
     image: hub.imooc.com:11111/micro-service/course-dubbo-service:latest
     environment:
-      MYSQL_ADDRESS: "192.168.0.113"
-      ZOOKEEPER_HOST: "192.168.0.110"
+      MYSQL_ADDRESS: "10.0.75.1"
     ports:
       - 20880:20880
     depends_on:
+      - zookeeper
       - user-service
 
   course-edge-service:
     image: hub.imooc.com:11111/micro-service/course-edge-service:latest
-    environment:
-      ZOOKEEPER_HOST: "192.168.0.110"
     depends_on:
       - course-dubbo-service
 

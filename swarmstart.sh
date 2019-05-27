@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-./api-gateway-zuul/build.sh
-./course-dubbo-service/build.sh
-./course-edge-service/build.sh
-./message-thrift-python-service/build.sh
-./user-edge-service/build.sh
-./user-thrift-service/build.sh
+sh api-gateway-zuul/build.sh
+sh course-dubbo-service/build.sh
+sh course-edge-service/build.sh
+sh message-thrift-python-service/build.sh
+sh user-edge-service/build.sh
+sh user-thrift-service/build.sh
+sh envfile
+docker stack deploy -c service.yml services

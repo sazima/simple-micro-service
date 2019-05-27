@@ -17,7 +17,7 @@ services:
     image: hub.imooc.com:11111/micro-service/user-service:latest
     environment:
       # 这是mysql的地址
-      MYSQL_ADDRESS: "192.168.0.113"
+      MYSQL_ADDRESS: "10.0.75.1"
     deploy:
 #      endpoint_mode: dnsrr
       resources:
@@ -31,22 +31,22 @@ services:
       - user-service
     environment:
       # 这是mysql的地址
-      REDIS_HOST: "192.168.0.113"
+      REDIS_HOST: "10.0.75.1"
 
   course-dubbo-service:
     image: hub.imooc.com:11111/micro-service/course-dubbo-service:latest
     environment:
-      MYSQL_ADDRESS: "192.168.0.113"
-      ZOOKEEPER_HOST: "192.168.0.110"
-    ports:
-      - 20880:20880
+      MYSQL_ADDRESS: "10.0.75.1"
+      ZOOKEEPER_HOST: "10.0.75.1"
+#    ports:
+#      - 20880:20880
     depends_on:
       - user-service
 
   course-edge-service:
     image: hub.imooc.com:11111/micro-service/course-edge-service:latest
     environment:
-      ZOOKEEPER_HOST: "192.168.0.110"
+      ZOOKEEPER_HOST: "10.0.75.1"
     depends_on:
       - course-dubbo-service
 

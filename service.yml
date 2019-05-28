@@ -18,7 +18,6 @@ services:
   user-service:
     image: hub.wktadmin.com:11111/micro-service/user-service:latest
     environment:
-      # 这是mysql的地址
       MYSQL_ADDRESS: ${MYSQL_ADDRESS}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     depends_on:
@@ -35,7 +34,6 @@ services:
       - user-service
       - message-service
     environment:
-      # 这是mysql的地址
       REDIS_HOST: ${REDIS_HOST}
 
   course-dubbo-service:
@@ -45,25 +43,15 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 20880:20880
-    depends_on:
-      - zookeeper
-      - user-service
+    command: ["./wait-for-it.sh", "zookeeper:2181", "-t", "50", "--", "sleep", "5;", "java", "-jar", "/fk.jar"]
 
   course-edge-service:
     image: hub.wktadmin.com:11111/micro-service/course-edge-service:latest
     depends_on:
       - course-dubbo-service
-    command: ["./wait-for-it.sh", "course-dubbo-service:8089", "--", "sleep", "5;", "java", "-jar", "/course-edge-service.jar"]
+    command: ["./wait-for-it.sh", "course-dubbo-service:8089", "--", "sleep", "5;", "java", "-jar", "/fk.jar"]
 
   api-gateway-zuul:
     image: hub.wktadmin.com:11111/micro-service/api-gateway-zuul:latest
     ports:
       - 8889:8889
-    depends_on:
-      - user-edge-service
-      - course-edge-service
-
-
-
-
-
